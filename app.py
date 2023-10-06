@@ -29,7 +29,7 @@ authorized_api_keys = set(config['api_keys'].values())
 # Configuration for running in Heroku
 
 # Access the API key from the environment variable
-api_key = os.environ.get('API_KEY')
+OPENAI_API_KEY = os.environ.get('API_KEY')
 
 # Access the authorized API keys and split them into a list
 authorized_api_keys = os.environ.get('AUTHORIZED_API_KEYS', '').split(',')
