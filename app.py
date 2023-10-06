@@ -6,7 +6,8 @@ This module contains a Flask application for generating birthday messages using 
 
 from flask import Flask, request, jsonify
 from flask_limiter import Limiter
-import configparser
+#import configparser for running locally with auth.cfg and creds.cfg file
+import os
 import openai
 import time
 from functools import wraps
@@ -15,12 +16,23 @@ from functions import *
 app = Flask(__name__)
 limiter = Limiter(app)
 
+# previous configuration for running locally
+"""
 config = configparser.ConfigParser()
 config.read('creds.cfg')
 openai.api_key = config['creds']['api_key']
 
 config.read('auth.cfg')
 authorized_api_keys = set(config['api_keys'].values())
+"""
+
+# Configuration for running in Heroku
+
+# Access the API key from the environment variable
+OPENAI_API_KEY = os.environ.get('API_KEY')
+
+# Access the authorized API keys and split them into a list
+authorized_api_keys = os.environ.get('AUTHORIZED_API_KEYS', '').split(',')
 
 # Sample data to simulate a database of birthday messages
 birthday_messages = []
