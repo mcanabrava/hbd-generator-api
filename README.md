@@ -1,13 +1,13 @@
 # hbd_generator
 Happy birthday generator using ChatGPT OpenAI API and Streamlit.
 
-The goal of this project is to develop an API that is capable of receiving input from a front-end, sending this input to ChatGPT API and returning an answer to the front-end. 
+The goal of this project is to develop an API that is capable of receiving input from a front-end, sending this input to ChatGPT API, and returning an answer to the front-end. 
 
-** This repository contains only the API portion of the code as the front-end was designed to work as a different service. To access the front-end repository, click here. #TODO **
+**This repository contains only the API portion of the code as the front end was designed to work as a different service. To access the front-end repository, [click here](https://github.com/mcanabrava/hbd-msg-generator).**
 
 The end result can be seen in the images below, but for a better understanding it is highly recommended to watch my [Loom Demo.](https://www.loom.com/share/c84191f941c648db96306447fcd258a1)
 
-Check the example below for Grandmother Alice, who likes rock and roll, parties and violets very much:
+Check the example below for Grandmother Alice, who likes rock and roll, parties, and violets very much:
 
 ![Form](images/streamlit_form.png)
 
@@ -99,7 +99,7 @@ http://localhost:5000/birthday-messages?friend_name=Joseph&relationship_type=hus
 
 ![joseph](images/JosephRequest.png)
 
-Query string implementations are useful for use cases when there is a need for simple and transparent information. They can also be easily cached by intermediaries like proxy servers, which can improve performance and reduce server load for frequently accessed resources. In addition to this, query string URLs can be bookmarked by end users, which is helpful for saving specific views, filters, and search results. However, for more complex data structures, larger volumes of data, and sensitive information, JSON body is the go-to option.
+Query string implementations are useful for use cases when there is a need for simple and transparent information. They can also be easily cached by intermediaries like proxy servers, which can improve performance and reduce server load for frequently accessed resources. In addition to this, query string URLs can be bookmarked by end users, which is helpful for saving specific views, filters, and search results. However, for more complex data structures, larger volumes of data, and sensitive information, the JSON body is the go-to option.
 
 ## Authentication and Authorization
 
@@ -107,13 +107,13 @@ Basic API_key authorization was added to the project, making it necessary to add
 
 ## Rate Limit and Throttling
 
-This project uses flask rate limite library. To install, execute the command below:
+This project uses the Flask rate limit library. To install, execute the command below:
 
 ```
 pip install Flask-Limiter
 ```
 
-Using Flask-Limiter is as easy as adding the @limiter.limit decorator with the limiting expression as a string on top of each endpoint, example: @limiter.limit("10 per minute"). The greatest advantage of rate limiting calls for this project is that as credits for my ChatGPT API Key are limited, I would like to avoid a single user to drain all of the credits by making multiple calls in a short time window. The result of multiple calls after the rate limit implementation can be seen below:
+Using Flask-Limiter is as easy as adding the @limiter.limit decorator with the limiting expression as a string on top of each endpoint, for example: @limiter.limit("10 per minute"). The greatest advantage of rate-limiting calls for this project is that as credits for my ChatGPT API Key are limited, I would like to avoid a single user draining all of the credits by making multiple calls in a short time window. The result of multiple calls after the rate limit implementation can be seen below:
 
 ![RateLimit](images/rateLimit.png)
 
@@ -122,20 +122,6 @@ Throttling is a mechanism that limits the rate at which requests are processed o
 To avoid receiving these consecutive calls or sending the rate limit error message, a basic throttling mechanism was implemented. The result is that the API takes longer to answer, which can be observed in Postman by the increased time "Sending request..." is kept on the screen.
 
 ![throttlingExample](images/throttlingExample.png)
-
-## Front-end with Streamlit
-
-Streamlit is a pure python library that can be used to develop front-end elements.
-
-```
-pip install streamlit
-```
-
-The streamlit_app.py file in this directory can be run with the following command:
-
-```
-streamlit run streamlit_app.py
-```
 
 ## Next steps
 
